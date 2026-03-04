@@ -32,13 +32,13 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 1. Point Coolify at this repository
 2. Set these environment variables in the dashboard:
 
-| Variable | Description |
-|---|---|
-| `POSTGRES_DB` | Database name |
-| `POSTGRES_USER` | Database user |
-| `POSTGRES_PASSWORD` | **Use a strong password** |
-| `BETTER_AUTH_SECRET` | Run `openssl rand -base64 32` to generate |
-| `BETTER_AUTH_URL` | The URL your app is publicly accessible at |
+| Variable             | Description                                |
+| -------------------- | ------------------------------------------ |
+| `POSTGRES_DB`        | Database name                              |
+| `POSTGRES_USER`      | Database user                              |
+| `POSTGRES_PASSWORD`  | **Use a strong password**                  |
+| `BETTER_AUTH_SECRET` | Run `openssl rand -base64 32` to generate  |
+| `BETTER_AUTH_URL`    | The URL your app is publicly accessible at |
 
 Everything else (`PORT`, `POSTGRES_PORT`) can stay at defaults.
 
@@ -60,15 +60,15 @@ The app is now running at [http://localhost:3000](http://localhost:3000).
 
 ### Useful commands
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start all apps in development mode |
-| `pnpm build` | Build all apps |
-| `pnpm db-dev:up` | Start the local Postgres container |
-| `pnpm db-dev:down` | Stop the local Postgres container |
-| `pnpm db:migrate` | Create and apply a new migration |
+| Command            | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `pnpm dev`         | Start all apps in development mode                |
+| `pnpm build`       | Build all apps                                    |
+| `pnpm db-dev:up`   | Start the local Postgres container                |
+| `pnpm db-dev:down` | Stop the local Postgres container                 |
+| `pnpm db:migrate`  | Create and apply a new migration                  |
 | `pnpm db:generate` | Regenerate the Prisma client after schema changes |
-| `pnpm db:studio` | Open Prisma Studio to browse the database |
+| `pnpm db:studio`   | Open Prisma Studio to browse the database         |
 
 ## 🤝 Contributing
 
