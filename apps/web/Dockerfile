@@ -20,8 +20,8 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=installer /app .
 COPY --from=pruner /app/out/full/ .
-RUN pnpm --filter @arbeitsraum/db db:generate
-RUN pnpm --filter @arbeitsraum/web build
+RUN DATABASE_URL=postgresql://x:x@x:5432/x pnpm --filter @arbeitsraum/db exec prisma generate
+RUN pnpm --filter @arbeitsraum/web exec next build
 
 # ---- Runner: minimal production image ----
 FROM node:22-alpine AS runner

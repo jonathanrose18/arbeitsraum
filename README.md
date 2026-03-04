@@ -13,48 +13,46 @@
   </p>
 </div>
 
-## 🚀 Getting Started
+## 🚀 Self-hosting
 
-### Prerequisites
+Requires [Docker](https://www.docker.com).
 
-- [Node.js](https://nodejs.org) >= 18
-- [pnpm](https://pnpm.io) >= 9.5 (`npm install -g pnpm`)
-- [Docker](https://www.docker.com) (for the database)
+```bash
+git clone https://github.com/jonathanrose18/arbeitsraum.git
+cd arbeitsraum
+./setup.sh
+```
 
-### Development setup
+`setup.sh` copies `.env.example` to `.env`, generates a secure `BETTER_AUTH_SECRET`, and starts the app. That's it.
 
-**1. Clone and install dependencies**
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+### Deploying with Coolify or similar
+
+1. Point Coolify at this repository
+2. Set these environment variables in the dashboard:
+
+| Variable | Description |
+|---|---|
+| `POSTGRES_DB` | Database name |
+| `POSTGRES_USER` | Database user |
+| `POSTGRES_PASSWORD` | **Use a strong password** |
+| `BETTER_AUTH_SECRET` | Run `openssl rand -base64 32` to generate |
+| `BETTER_AUTH_URL` | The URL your app is publicly accessible at |
+
+Everything else (`PORT`, `POSTGRES_PORT`) can stay at defaults.
+
+## 💻 Development
+
+Requires [Node.js](https://nodejs.org) >= 18, [pnpm](https://pnpm.io) >= 9.5, and [Docker](https://www.docker.com).
 
 ```bash
 git clone https://github.com/jonathanrose18/arbeitsraum.git
 cd arbeitsraum
 pnpm install
-```
-
-**2. Configure environment variables**
-
-```bash
 cp .env.example .env
-```
-
-The defaults in `.env.example` work out of the box for local development — no changes needed unless you want custom credentials.
-
-**3. Start the database**
-
-```bash
 pnpm db-dev:up
-```
-
-**4. Run migrations and generate the Prisma client**
-
-```bash
 pnpm db:migrate
-pnpm db:generate
-```
-
-**5. Start the development server**
-
-```bash
 pnpm dev
 ```
 
@@ -71,13 +69,6 @@ The app is now running at [http://localhost:3000](http://localhost:3000).
 | `pnpm db:migrate` | Create and apply a new migration |
 | `pnpm db:generate` | Regenerate the Prisma client after schema changes |
 | `pnpm db:studio` | Open Prisma Studio to browse the database |
-
-### Production
-
-```bash
-cp .env.example .env  # set secure passwords
-pnpm prod:up          # build images, run migrations, start the app
-```
 
 ## 🤝 Contributing
 
