@@ -1,0 +1,26 @@
+{
+  "name": "@arbeitsraum/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:generate": "dotenv -e ../../.env -- prisma generate",
+    "db:push": "dotenv -e ../../.env -- prisma db push",
+    "db:migrate": "dotenv -e ../../.env -- prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:studio": "dotenv -e ../../.env -- prisma studio"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^6.19.2",
+    "pg": "^8.19.0"
+  },
+  "devDependencies": {
+    "@arbeitsraum/typescript-config": "workspace:*",
+    "prisma": "^6.19.2",
+    "typescript": "5.9.2"
+  }
+}

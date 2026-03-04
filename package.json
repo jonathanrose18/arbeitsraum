@@ -6,15 +6,27 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md}\"",
-    "check-types": "turbo run check-types"
+    "check-types": "turbo run check-types",
+    "db:up": "docker compose up -d postgres",
+    "db-dev:up": "docker compose -f docker-compose.dev.yml up -d db",
+    "db-dev:down": "docker compose down",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "db:migrate": "pnpm --filter @arbeitsraum/db db:migrate",
+    "db:generate": "pnpm --filter @arbeitsraum/db db:generate",
+    "prod:build": "docker compose build",
+    "prod:up": "docker compose up -d",
+    "prod:down": "docker compose down",
+    "prod:logs": "docker compose logs -f web"
   },
   "devDependencies": {
+    "dotenv-cli": "^8.0.0",
     "prettier": "catalog:",
-		"prettier-plugin-tailwindcss": "catalog:",
+    "prettier-plugin-tailwindcss": "catalog:",
     "turbo": "^2.8.12",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">=18"
   }

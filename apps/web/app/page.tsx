@@ -1,3 +1,12 @@
-export default function Home() {
-  return <div>Hello, from arbeitsraum 👋</div>
+import { prisma } from '@arbeitsraum/db'
+
+export default async function Home() {
+  const userCount = await prisma.user.count()
+
+  return (
+    <main className="flex h-screen items-center justify-center">
+      <div>Hello, from arbeitsraum 👋</div>
+      <p>Number of users: {userCount}</p>
+    </main>
+  )
 }
