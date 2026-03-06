@@ -1,3 +1,6 @@
+> [!WARNING]
+> This project is in early development. Breaking changes may occur at any time without notice.
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./logo-white.svg">

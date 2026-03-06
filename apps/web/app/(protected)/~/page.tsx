@@ -7,7 +7,7 @@ async function Page() {
   const auth = await getAuth()
 
   if (!auth) {
-    redirect('/auth/sign-in', RedirectType.replace)
+    redirect('/sign-in', RedirectType.replace)
   }
 
   return <div>Hello, from your arbeitsraum 👋</div>

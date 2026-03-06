@@ -14,7 +14,7 @@ export function withAuth<P>(
     redirectType?: RedirectType
   } = {},
 ) {
-  const { redirectTo = '/auth/sign-in', redirectType = RedirectType.replace } =
+  const { redirectTo = '/sign-in', redirectType = RedirectType.replace } =
     options
 
   return async function AuthenticatedComponent(props: P) {
