@@ -75,7 +75,7 @@ apps/web/
       sign-in/page.tsx
       sign-up/page.tsx
     (protected)/
-      ~/page.tsx
+      page.tsx
     api/
       auth/[...all]/route.ts
     layout.tsx
