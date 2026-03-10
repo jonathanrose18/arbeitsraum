@@ -1,4 +1,4 @@
-import { SignInForm } from '@/features-2/auth/components/sign-in-form'
+import { SignInForm } from '@/features/auth/components/sign-in-form'
 import { withSuperUser } from '@/hoc/with-super-user'
 
 function SignInPage() {
