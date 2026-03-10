@@ -93,6 +93,20 @@ export function useTerminalForm({
     setDraft(value)
   }
 
+  function handleReset() {
+    if (phase === 'submitting' || phase === 'intro') return
+    if (timeoutRef.current !== null) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+    setLines([])
+    setDraft('')
+    setFieldError(null)
+    setSubmitError('')
+    form.reset()
+    setPhase(firstField)
+  }
+
   function handleEnter() {
     if (!draft.trim()) return
 
@@ -141,5 +155,6 @@ export function useTerminalForm({
     submitError,
     handleDraftChange,
     handleEnter,
+    handleReset,
   }
 }

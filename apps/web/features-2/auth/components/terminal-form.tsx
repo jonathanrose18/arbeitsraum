@@ -51,6 +51,7 @@ export function TerminalForm({
     submitError,
     handleDraftChange,
     handleEnter,
+    handleReset,
   } = useTerminalForm({ fields, schema, onSubmit, onSuccess })
 
   return (
@@ -74,6 +75,7 @@ export function TerminalForm({
       <div
         className='relative min-h-40 cursor-text space-y-1.5 p-5 text-sm'
         onClick={() => inputRef.current?.focus()}
+        onKeyDown={(e) => e.ctrlKey && e.key === 'c' && handleReset()}
       >
         <TypingAnimation startOnView={false} className='text-primary'>
           {command}
@@ -90,7 +92,7 @@ export function TerminalForm({
             <span className='text-muted-foreground shrink-0'>
               {line.prompt} ▸
             </span>
-            <span className='text-foreground'>
+            <span className='text-foreground break-all'>
               {line.masked ? '•'.repeat(line.value.length) : line.value}
             </span>
           </div>
@@ -105,7 +107,7 @@ export function TerminalForm({
             <span className='text-muted-foreground shrink-0'>
               {currentField.name} ▸
             </span>
-            <span className='text-foreground whitespace-pre'>
+            <span className='text-foreground min-w-0 whitespace-pre-wrap break-all'>
               {displayDraft}
               <span className='animate-cursor bg-foreground ml-px inline-block h-[1em] w-[0.55ch] translate-y-[0.05em]' />
             </span>
@@ -147,12 +149,24 @@ export function TerminalForm({
           })()}
         </AnimatePresence>
 
+        {phase !== 'intro' && phase !== 'submitting' && phase !== 'success' && (
+          <button
+            onClick={handleReset}
+            className='text-muted-foreground/40 hover:text-muted-foreground/70 pt-1 text-xs transition-colors'
+          >
+            <span className='hidden sm:inline'>^C </span>restart
+          </button>
+        )}
+
         <input
           ref={inputRef}
           type={currentField?.inputType ?? 'text'}
           value={draft}
           onChange={(e) => isFieldActive && handleDraftChange(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleEnter()
+            if (e.ctrlKey && e.key === 'c') handleReset()
+          }}
           autoComplete={currentField?.autoComplete}
           className='sr-only'
         />
