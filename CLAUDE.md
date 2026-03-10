@@ -125,3 +125,4 @@ Key rules:
 2. Query directly with Prisma — no repository layer. Prisma is already a good abstraction. Add a repository only if you genuinely need to swap data sources.
 3. Co-locate by feature — when you delete a feature, you delete one folder.
 4. `lib/` never imports from `features/` — dependencies flow one way.
+5. Every page must be protected with `withAuth` unless it lives under `app/(auth)/`. There are no public pages in this app — arbeitsraum is a fully authenticated experience. The auth redirect chain (`withAuth` → `/sign-in` → `withSuperUser()` check → `/sign-up`) ensures unauthenticated users and first-time setup are handled automatically.

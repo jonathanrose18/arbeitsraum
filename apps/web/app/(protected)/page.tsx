@@ -1,6 +1,5 @@
-'use client'
-
 import { ThemeChanger } from '@/components/theme-changer'
+import { withAuth } from '@/hoc/with-auth'
 
 const colors = [
   { name: 'background', var: '--background' },
@@ -39,7 +38,7 @@ const colors = [
 
 export const force = 'dynamic'
 
-export default function Page() {
+async function Page() {
   return (
     <div className='bg-background min-h-screen p-8'>
       <ThemeChanger />
@@ -57,3 +56,5 @@ export default function Page() {
     </div>
   )
 }
+
+export default withAuth(Page)
