@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
-import { signUp } from '@/lib/auth-client'
+import { signUpAction } from '../actions'
 import { TerminalForm } from './terminal-form'
 import type { FieldDef } from '../types'
 
@@ -36,13 +36,10 @@ const introLines = [
 export function SignUpForm() {
   const router = useRouter()
 
-  async function submit(values: Record<string, string>) {
-    return signUp.email({
-      name: values.name!,
-      email: values.email!,
-      password: values.password!,
-    })
-  }
+  const onSubmit = async (values: Record<string, string>) =>
+    signUpAction(values)
+
+  const onSuccess = () => router.push('/')
 
   return (
     <TerminalForm
@@ -55,8 +52,8 @@ export function SignUpForm() {
         submitting: 'Creating superuser...',
         success: '✓ Superuser created. Starting arbeitsraum...',
       }}
-      onSubmit={submit}
-      onSuccess={() => router.push('/')}
+      onSubmit={onSubmit}
+      onSuccess={onSuccess}
     />
   )
 }

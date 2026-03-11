@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
-import { signIn } from '@/lib/auth-client'
+import { signInAction } from '../actions'
 import { TerminalForm } from './terminal-form'
 import type { FieldDef } from '../types'
 
@@ -15,10 +15,10 @@ const schema = z.object({
 const fields: FieldDef[] = [
   { name: 'email', inputType: 'email', autoComplete: 'email' },
   {
-    name: 'password',
-    masked: true,
-    inputType: 'password',
     autoComplete: 'current-password',
+    inputType: 'password',
+    masked: true,
+    name: 'password',
   },
 ]
 
@@ -38,23 +38,24 @@ const introLines = [
 export function SignInForm() {
   const router = useRouter()
 
-  async function submit(values: Record<string, string>) {
-    return signIn.email({ email: values.email!, password: values.password! })
-  }
+  const onSubmit = async (values: Record<string, string>) =>
+    signInAction(values)
+
+  const onSuccess = () => router.push('/')
 
   return (
     <TerminalForm
-      title='arbeitsraum — login'
       command='> arbeitsraum --login'
-      introLines={introLines}
       fields={fields}
+      introLines={introLines}
       schema={schema}
+      title='arbeitsraum — login'
       statusMessages={{
         submitting: 'Authenticating...',
         success: '✓ Access granted. Redirecting...',
       }}
-      onSubmit={submit}
-      onSuccess={() => router.push('/')}
+      onSubmit={onSubmit}
+      onSuccess={onSuccess}
     />
   )
 }

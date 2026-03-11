@@ -27,6 +27,10 @@
     },
     "db:push": {
       "cache": false
+    },
+    "test": {
+      "inputs": ["**/*.{ts,tsx}", "vitest.config.ts"],
+      "outputs": []
     }
   }
 }
