@@ -5,7 +5,11 @@ import type { FieldDef } from '../types'
 import { useFormPhases } from './use-form-phases'
 
 const emailField: FieldDef = { name: 'email', inputType: 'email' }
-const passwordField: FieldDef = { name: 'password', masked: true, inputType: 'password' }
+const passwordField: FieldDef = {
+  name: 'password',
+  masked: true,
+  inputType: 'password',
+}
 const nameField: FieldDef = { name: 'name', inputType: 'text' }
 const twoFields = [emailField, passwordField]
 const threeFields = [nameField, emailField, passwordField]
@@ -181,7 +185,11 @@ describe('useFormPhases', () => {
     it('auto-recovers to first field after errorRecoveryDelay', async () => {
       vi.useFakeTimers()
       const { result } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())
@@ -195,7 +203,11 @@ describe('useFormPhases', () => {
       vi.useFakeTimers()
       const onRecovered = vi.fn()
       const { result } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())
@@ -210,7 +222,11 @@ describe('useFormPhases', () => {
       vi.useFakeTimers()
       const onRecovered = vi.fn()
       const { result } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())
@@ -254,7 +270,11 @@ describe('useFormPhases', () => {
       const firstCallback = vi.fn()
       const secondCallback = vi.fn()
       const { result } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())
@@ -272,7 +292,11 @@ describe('useFormPhases', () => {
       vi.useFakeTimers()
       const onRecovered = vi.fn()
       const { result, unmount } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())
@@ -312,7 +336,11 @@ describe('useFormPhases', () => {
       vi.useFakeTimers()
       const onRecovered = vi.fn()
       const { result } = renderHook(() =>
-        useFormPhases({ fields: twoFields, introDuration: 0, errorRecoveryDelay: 500 }),
+        useFormPhases({
+          fields: twoFields,
+          introDuration: 0,
+          errorRecoveryDelay: 500,
+        }),
       )
       await act(async () => vi.advanceTimersByTime(0))
       act(() => result.current.advanceField())

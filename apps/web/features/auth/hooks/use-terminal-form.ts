@@ -16,9 +16,18 @@ interface Options {
   onSuccess: () => void
 }
 
-export function useTerminalForm({ fields, schema, onSubmit, onSuccess }: Options) {
+export function useTerminalForm({
+  fields,
+  schema,
+  onSubmit,
+  onSuccess,
+}: Options) {
   const defaultValues = useMemo(
-    () => Object.fromEntries(fields.map((f) => [f.name, ''])) as Record<string, string>,
+    () =>
+      Object.fromEntries(fields.map((f) => [f.name, ''])) as Record<
+        string,
+        string
+      >,
     [fields],
   )
 
@@ -32,7 +41,8 @@ export function useTerminalForm({ fields, schema, onSubmit, onSuccess }: Options
 
   useEffect(() => {
     return () => {
-      if (successTimerRef.current !== null) clearTimeout(successTimerRef.current)
+      if (successTimerRef.current !== null)
+        clearTimeout(successTimerRef.current)
     }
   }, [])
 
@@ -112,7 +122,11 @@ export function useTerminalForm({ fields, schema, onSubmit, onSuccess }: Options
     form.setFieldValue(currentField.name, draft)
     setLines((prev) => [
       ...prev,
-      { prompt: currentField.name, value: draft, masked: !!currentField.masked },
+      {
+        prompt: currentField.name,
+        value: draft,
+        masked: !!currentField.masked,
+      },
     ])
     setDraft('')
 

@@ -36,7 +36,8 @@ export function useFormPhases({
 
   useEffect(() => {
     return () => {
-      if (recoveryTimerRef.current !== null) clearTimeout(recoveryTimerRef.current)
+      if (recoveryTimerRef.current !== null)
+        clearTimeout(recoveryTimerRef.current)
     }
   }, [])
 
@@ -63,7 +64,8 @@ export function useFormPhases({
 
   const setError = useCallback(
     (onRecovered?: () => void) => {
-      if (recoveryTimerRef.current !== null) clearTimeout(recoveryTimerRef.current)
+      if (recoveryTimerRef.current !== null)
+        clearTimeout(recoveryTimerRef.current)
       setPhase('error')
       recoveryTimerRef.current = setTimeout(() => {
         recoveryTimerRef.current = null
@@ -87,5 +89,14 @@ export function useFormPhases({
   const isFieldActive = currentField !== null
   const canReset = phase !== 'submitting' && phase !== 'intro'
 
-  return { phase, currentField, isFieldActive, canReset, advanceField, setSuccess, setError, reset }
+  return {
+    phase,
+    currentField,
+    isFieldActive,
+    canReset,
+    advanceField,
+    setSuccess,
+    setError,
+    reset,
+  }
 }

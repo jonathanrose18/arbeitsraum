@@ -131,9 +131,21 @@ export function TerminalForm({
         <AnimatePresence mode='wait'>
           {(() => {
             const status = {
-              submitting: { text: statusMessages.submitting, className: 'text-muted-foreground', exit: true },
-              error: { text: `✗ ${submitError}`, className: 'text-destructive', exit: false },
-              success: { text: statusMessages.success, className: 'text-green-500', exit: false },
+              submitting: {
+                text: statusMessages.submitting,
+                className: 'text-muted-foreground',
+                exit: true,
+              },
+              error: {
+                text: `✗ ${submitError}`,
+                className: 'text-destructive',
+                exit: false,
+              },
+              success: {
+                text: statusMessages.success,
+                className: 'text-green-500',
+                exit: false,
+              },
             }[phase]
             return status ? (
               <motion.p

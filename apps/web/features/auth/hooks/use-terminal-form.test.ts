@@ -19,13 +19,18 @@ afterEach(() => {
   vi.useRealTimers()
 })
 
-type SubmitFn = (values: Record<string, string>) => Promise<{ error?: { message?: string } | null }>
+type SubmitFn = (
+  values: Record<string, string>,
+) => Promise<{ error?: { message?: string } | null }>
 
 function setup(opts?: { onSubmit?: SubmitFn; onSuccess?: () => void }) {
   vi.useFakeTimers()
-  const onSubmit: SubmitFn = opts?.onSubmit ?? vi.fn().mockResolvedValue({ error: null })
+  const onSubmit: SubmitFn =
+    opts?.onSubmit ?? vi.fn().mockResolvedValue({ error: null })
   const onSuccess = opts?.onSuccess ?? vi.fn()
-  const { result } = renderHook(() => useTerminalForm({ fields, schema, onSubmit, onSuccess }))
+  const { result } = renderHook(() =>
+    useTerminalForm({ fields, schema, onSubmit, onSuccess }),
+  )
   return { result, onSubmit, onSuccess }
 }
 
@@ -231,7 +236,9 @@ describe('useTerminalForm', () => {
 
   describe('submission', () => {
     it('transitions to success after successful submission', async () => {
-      const { result } = setup({ onSubmit: vi.fn().mockResolvedValue({ error: null }) })
+      const { result } = setup({
+        onSubmit: vi.fn().mockResolvedValue({ error: null }),
+      })
       await fillAndSubmit(result)
       expect(result.current.phase).toBe('success')
     })
@@ -263,7 +270,9 @@ describe('useTerminalForm', () => {
 
     it('transitions to error phase on failed submission', async () => {
       const { result } = setup({
-        onSubmit: vi.fn().mockResolvedValue({ error: { message: 'Invalid credentials.' } }),
+        onSubmit: vi
+          .fn()
+          .mockResolvedValue({ error: { message: 'Invalid credentials.' } }),
       })
       await fillAndSubmit(result)
       expect(result.current.phase).toBe('error')
@@ -272,7 +281,9 @@ describe('useTerminalForm', () => {
 
     it('auto-resets after the 1800ms error recovery delay', async () => {
       const { result } = setup({
-        onSubmit: vi.fn().mockResolvedValue({ error: { message: 'Invalid credentials.' } }),
+        onSubmit: vi
+          .fn()
+          .mockResolvedValue({ error: { message: 'Invalid credentials.' } }),
       })
       await fillAndSubmit(result)
       await act(async () => vi.advanceTimersByTime(1800))
